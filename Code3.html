@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        #weatherData {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .fetch-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .fetch-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <button class="fetch-button" onclick="fetchWeatherData()">Fetch Weather Data</button>
+    </div>
+
+    <div id="weatherData"></div>
+
+    <script>
+        function fetchWeatherData() {
+            const weatherData = {
+                "alerts": [],
+                "city_name": "Dayton",
+                "country_code": "US",
+                "lat": 39.7589,
+                "lon": -84.1916,
+                "state_code": "OH",
+                "timezone": "America/New_York"
+            };
+
+            renderWeatherData(weatherData);
+        }
+
+        function renderWeatherData(data) {
+            const weatherDataElement = document.getElementById('weatherData');
+            weatherDataElement.innerHTML = '';
+
+            const table = createWeatherTable(data);
+            weatherDataElement.appendChild(table);
+        }
+
+        function createWeatherTable(data) {
+            const table = document.createElement('table');
+            table.innerHTML = `
+                <tr><th>Key</th><th>Value</th></tr>
+                <tr><td>City Name</td><td>${data.city_name}</td></tr>
+                <tr><td>Country Code</td><td>${data.country_code}</td></tr>
+                <tr><td>Latitude</td><td>${data.lat}</td></tr>
+                <tr><td>Longitude</td><td>${data.lon}</td></tr>
+                <tr><td>State Code</td><td>${data.state_code}</td></tr>
+                <tr><td>Timezone</td><td>${data.timezone}</td></tr>
+            `;
+            return table;
+        }
+    </script>
+</body>
+</html>
